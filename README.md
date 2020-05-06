@@ -5,7 +5,7 @@ npm install --save ag-grid-enterprise       https://www.ag-grid.com/react-grid/
 npm install @material/react-text-field
 npm install @material-ui/core
 npm install @material-ui/icons
-
+npm install react-draggable
 
 run chrome with 
 --allow-file-access-from-files
