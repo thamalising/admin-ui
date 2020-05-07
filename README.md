@@ -6,6 +6,8 @@ npm install @material/react-text-field
 npm install @material-ui/core
 npm install @material-ui/icons
 npm install react-draggable
+npm install --save react-swipeable-views
+
 
 run chrome with 
 --allow-file-access-from-files

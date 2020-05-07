@@ -30,7 +30,7 @@ export function WardenView(){
   const [ wardens, setWardens ] = useState([]);
   const [ addWardenBtnType, setAddWardenBtnType ] = useState(<AddIcon/>);
   const [ wardenActionType, setWardenActionType ] = useState('addWarden');
-  const [ wardenGridHeight, setwardenGridHeight ] = useState("600px")
+  const [ wardenGridHeight, setwardenGridHeight ] = useState("500px")
   const [ wardenGridApi, setWardenGridApi ] = useState({});
 
   const [ locations, setLocations ] = useState([]);
@@ -114,7 +114,7 @@ export function WardenView(){
     setMoble("");
     setAddress("");
     setEmail("");
-    setwardenGridHeight('600px')
+    setwardenGridHeight('500px')
     setlocationGridHeight('0px')
   }
 
