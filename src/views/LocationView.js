@@ -17,6 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import { MapComponent } from '../components/MapComponent';
 
 export function LocationView(){
   const [ id, setId ] = useState(0);
@@ -36,6 +37,8 @@ export function LocationView(){
   
   const [ dialogText, setDialogText ] = useState("")
   const [ open, setOpen] = useState(false);
+
+  const [showMap, setShowMap] = useState(false);
   
   const locationGridProp = {
     columnDefs: [
@@ -48,9 +51,9 @@ export function LocationView(){
         width:10,
         cellStyle: function(param) {
           if (param.value == null)
-            return {color: '#DAF7A6', backgroundColor: '#DAF7A6'};
+            return {color: '#FFFFFF', backgroundColor: '#FFFFFF'};
           else
-            return {color: '#FFC300', backgroundColor: '#FFC300'};
+            return {color: '#FF0000', backgroundColor: '#FF0000'};
         },
         filter: false
       },
@@ -67,10 +70,18 @@ export function LocationView(){
     );
   }
   
-  function setSaveMode()
+  function setSaveModeFromAddButton()
+  {
+    setAddLocationBtnType(<SaveIcon/>);
+    setLocationActionType('addLocation');
+    setShowMap(true)
+  }
+
+  function setSaveModeFromEditButton()
   {
     setAddLocationBtnType(<SaveIcon/>);
     setLocationActionType('saveLocation');
+    setShowMap(true)
   }
 
   const dialogOpen = () => {
@@ -92,6 +103,7 @@ export function LocationView(){
     setLatitude("");
     setSlots("");
     setWarden(null);
+    setShowMap(false);
   }
 
   function getSelectedlocationsId() {
@@ -112,6 +124,13 @@ export function LocationView(){
     });
   }
 
+  function onClickedOnMap(latlng)
+  {
+    setLatitude(latlng[0]);
+    setLongitude(latlng[1]);
+    console.log('onMapClicked callback latlng:' + latlng);
+  }
+  
   // onload
   useEffect(()=>{
     loadLocations();
@@ -123,12 +142,14 @@ export function LocationView(){
         <div className="col-md-6">
           <p className="textAlignCenter"></p>
           <div className="ag-theme-balham" style={{height: locationGridHeight, width: '530px'}}>
-            <AgGridReact pagination={true}
+            {!showMap && <AgGridReact pagination={true}
               columnDefs={locationGridProp.columnDefs}
               rowData={locations}
               onGridReady={(params)=>setLocationGridApi(params.api)}
               rowSelection={'single'}
-            />
+            />}
+
+            {showMap && <MapComponent onMapClick={onClickedOnMap}/>}
           </div>
         </div>
         <div className="col-md-1">
@@ -184,7 +205,7 @@ export function LocationView(){
             <Button variant="contained" color="primary" size="large" startIcon={<EditIcon/>}
               onClick={() => {
                 console.log('edit click');
-                setSaveMode();
+                setSaveModeFromEditButton();
                 const locationId = getSelectedlocationsId();
                 console.log('edit location-id:' + locationId);
                 if (locationId.length) {
@@ -252,18 +273,18 @@ export function LocationView(){
             <TextField label={"City"} value={city} fullWidth={true} onChange={(event)=>setCity(event.target.value)}/>
           </div>
           <div className="inputFieldWrapper">
-            <TextField label={"Longitude"} value={lon} fullWidth={true} onChange={(event)=>setLongitude(event.target.value)}/>
-          </div>
-          <div className="inputFieldWrapper">
-            <TextField label={"Latitude"} value={lat} fullWidth={true} onChange={(event)=>setLatitude(event.target.value)}/>
-          </div>
-          <div className="inputFieldWrapper">
             <TextField label={"# of slots"} value={slots} fullWidth={true} onChange={(event)=>setSlots(event.target.value)}/>
           </div>
           <div className="btnWrapper">
             <Button variant="contained" color="primary" size="large" startIcon={addLocationBtnType}
               onClick={() => {
                 const obj = { 'lname': lname, 'lon': lon, 'lat': lat, 'city': city, 'slots': slots }
+                // if lan lot not there on the map mode
+                if (lon == 0 && lat == 0) {
+                  setSaveModeFromAddButton();
+                  return;
+                }
+                
                 if (lname.length && lon > 0 && lat > 0 && city.length && slots > 0) {
                   
                   if (locationActionType == 'addLocation') {
@@ -288,8 +309,12 @@ export function LocationView(){
                   }
                 } else console.error('input error:' + JSON.stringify(obj))
                 resetSubmitForm();
+
               }}/>
           </div>
+          <div className="inputFieldWrapper">
+            <TextField disabled label={"Latitude:Longitude"} value={lat.length == 0 ? '' : lat +':' + lon} fullWidth={true}/>
+          </div>          
         </div>
       </div>
     </div>

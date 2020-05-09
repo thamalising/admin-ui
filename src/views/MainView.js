@@ -2,6 +2,7 @@ import "./MainView.css";
 import React, { useState, useEffect } from 'react';
 import {WardenView} from './WardenView';
 import {LocationView} from './LocationView';
+import {MapComponent} from '../components/MapComponent';
 
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
@@ -80,6 +81,7 @@ export function MainView() {
         >
           <Tab icon={<LocationIcon/>}/>
           <Tab icon={<LocalParkingIcon/>}/>
+          <Tab icon={<LocalParkingIcon/>}/>
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -92,6 +94,9 @@ export function MainView() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <WardenView/>
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          <MapComponent/>
         </TabPanel>
       </SwipeableViews>
     </div>

@@ -7,6 +7,7 @@ npm install @material-ui/core
 npm install @material-ui/icons
 npm install react-draggable
 npm install --save react-swipeable-views
+npm install --save react-google-maps
 
 
 run chrome with 
