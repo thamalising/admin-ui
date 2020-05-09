@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {WardenView} from './WardenView';
 import {LocationView} from './LocationView';
 import {MapComponent} from '../components/MapComponent';
+import {LoginView} from './LoginView';
 
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
@@ -58,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 export function MainView() {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [loginMode, setLoginMode] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -67,6 +69,16 @@ export function MainView() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  function onLoginSuccess()
+  {
+    setLoginMode(false);
+  }
+
+  function onLoginFailed()
+  {
+    setLoginMode(true);
+  }
 
   return (
     <div className={classes.root}>
@@ -81,10 +93,9 @@ export function MainView() {
         >
           <Tab icon={<LocationIcon/>}/>
           <Tab icon={<LocalParkingIcon/>}/>
-          <Tab icon={<LocalParkingIcon/>}/>
         </Tabs>
       </AppBar>
-      <SwipeableViews
+      { !loginMode && <SwipeableViews
         axis={'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
@@ -95,10 +106,9 @@ export function MainView() {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <WardenView/>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <MapComponent/>
-        </TabPanel>
-      </SwipeableViews>
+      </SwipeableViews>}
+
+      {loginMode && <LoginView onLogged={onLoginSuccess} onFailed={onLoginFailed}/>}
     </div>
   );
 }

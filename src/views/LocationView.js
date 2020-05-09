@@ -286,7 +286,6 @@ export function LocationView(){
                 }
                 
                 if (lname.length && lon > 0 && lat > 0 && city.length && slots > 0) {
-                  
                   if (locationActionType == 'addLocation') {
                     console.log('add click ' + JSON.stringify(obj));
                     axios.post(`http://localhost:8080/locations`, obj)
