@@ -126,7 +126,7 @@ export function LocationView(){
       <div className="row"><br/></div>
       <div className="row">
         <div className="col-md-6">
-          <div className="ag-theme-balham" style={{height: locationGridHeight, width: '700px'}}>
+          <div className="ag-theme-balham-dark" style={{height: locationGridHeight, width: '700px'}}>
             {/* show grid if no map mode on */}
             {!showMap && <AgGridReact pagination={true}
               paginationPageSize={15}

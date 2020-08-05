@@ -1,22 +1,8 @@
 import "./LoginView.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AgGridReact } from 'ag-grid-react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
-import EditIcon from '@material-ui/icons/Edit';
-import DetailIcon from '@material-ui/icons/Details';
-import LocationOff from '@material-ui/icons/LocationOff';
-import AddLocationIcon from '@material-ui/icons/AddLocation';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper from '@material-ui/core/Paper';
-import Draggable from 'react-draggable';
-import { MapComponent } from '../components/MapComponent';
 
 export function LoginView(props){
   const [ username, setUserName ] = useState("admin");

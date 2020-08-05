@@ -161,7 +161,7 @@ export function WardenView(){
       <div className="row">
         <div className="col-md-6">
           <p className="textAlignCenter"></p>
-          <div className="ag-theme-balham" style={{height: wardenGridHeight, width: '720px'}}>
+          <div className="ag-theme-balham-dark" style={{height: wardenGridHeight, width: '720px'}}>
             <AgGridReact pagination={true}
               paginationPageSize={15}
               columnDefs={wardenGridProp.columnDefs}
@@ -170,7 +170,7 @@ export function WardenView(){
               rowSelection={'single'}
             />
           </div>
-          <div className="ag-theme-balham" style={{height: locationGridHeight, width: '720px'}}>
+          <div className="ag-theme-balham-dark" style={{height: locationGridHeight, width: '720px'}}>
             <AgGridReact pagination={true}
               paginationPageSize={15}
               columnDefs={locationGridProp.columnDefs}
