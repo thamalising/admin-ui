@@ -15,6 +15,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +53,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 1250,
+    width: 1535,
   },
 }));
 
@@ -60,7 +61,7 @@ export function MainView() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [loginMode, setLoginMode] = useState(true);
+  const [showLogin, setshowLogin] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,15 +71,6 @@ export function MainView() {
     setValue(index);
   };
 
-  function onLoginSuccess()
-  {
-    setLoginMode(false);
-  }
-
-  function onLoginFailed()
-  {
-    setLoginMode(true);
-  }
 
   return (
     <div className={classes.root}>
@@ -91,15 +83,16 @@ export function MainView() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab icon={<LocationIcon/>}/>
-          <Tab icon={<LocalParkingIcon/>}/>
+          <Tooltip title="Locations" ><Tab icon={<LocationIcon/>}/></Tooltip>
+          <Tooltip title="Wardens" ><Tab icon={<LocalParkingIcon/>}/></Tooltip>
         </Tabs>
       </AppBar>
-      { !loginMode && <SwipeableViews
+      { !showLogin && <SwipeableViews
         axis={'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
+        
         <TabPanel value={value} index={0} dir={theme.direction}>
           <LocationView/>
         </TabPanel>
@@ -108,7 +101,7 @@ export function MainView() {
         </TabPanel>
       </SwipeableViews>}
 
-      {loginMode && <LoginView onLogged={onLoginSuccess} onFailed={onLoginFailed}/>}
+      {showLogin && <LoginView onLoginResult={(p)=>{setshowLogin(p)}} />}
     </div>
   );
 }

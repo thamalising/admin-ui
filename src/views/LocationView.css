@@ -1,16 +1,22 @@
 .inputFieldWrapper{
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .btnWrapper{
-    padding-top: 15px;
-    
+  padding-top: 15px;
+  
 }
 
 .ag-cell-focus,.ag-cell-no-focus{
-    border:none !important;
-  }
-  /* This CSS is to not apply the border for the column having 'no-border' class */
-  .no-border.ag-cell:focus{
-    border:none !important;
-    outline: none;
-  }
+  border:none !important;
+}
+/* This CSS is to not apply the border for the column having 'no-border' class */
+.no-border.ag-cell:focus{
+  border:none !important;
+  outline: none;
+}
+
+.container-location{
+  background-image: url(../images/11.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

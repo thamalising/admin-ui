@@ -19,8 +19,8 @@ import Draggable from 'react-draggable';
 import { MapComponent } from '../components/MapComponent';
 
 export function LoginView(props){
-  const [ username, setUserName ] = useState("");
-  const [ password, setPassword ] = useState("");
+  const [ username, setUserName ] = useState("admin");
+  const [ password, setPassword ] = useState("admin");
 
   function resetForm()
   {
@@ -30,11 +30,12 @@ export function LoginView(props){
   
   // onload
   useEffect(()=>{
-  
+
   },[])
 
   return(
-      <div className="container">
+      <div className="container-login">
+      <div className="row"><br/><br/><br/><br/><br/><br/><br/><br/></div>
       <div className="row">
         <div className="col-md-6"/>
         <div className="col-md-1"/>
@@ -54,19 +55,20 @@ export function LoginView(props){
                 .then(res => {
                     const response =  res.data;
                     console.log("response: login response:", response);
-                    props.onLogged();
+                    props.onLoginResult(false);
                 })
                 .catch(function (error) {
                     console.error(error);
                     console.log("response: login response: failed");
                     resetForm();
-                    props.onFailed();
+                    props.onLoginResult(true);
                 });
               }}>login
             </Button>
           </div>
         </div>
       </div>
+      <div className="row"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
     </div>
   )
 }
