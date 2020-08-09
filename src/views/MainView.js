@@ -4,12 +4,14 @@ import {WardenView} from './WardenView';
 import {LocationView} from './LocationView';
 import {MapComponent} from '../components/MapComponent';
 import {LoginView} from './LoginView';
+import {UserView} from './UserView';
 
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import LocationIcon from '@material-ui/icons/LocationOn';
+import UserIcon from '@material-ui/icons/People';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -78,6 +80,7 @@ export function MainView() {
         >
           <Tooltip title="Locations" ><Tab icon={<LocationIcon/>}/></Tooltip>
           <Tooltip title="Wardens" ><Tab icon={<LocalParkingIcon/>}/></Tooltip>
+          <Tooltip title="User" ><Tab icon={<UserIcon/>}/></Tooltip>
         </Tabs>
       </AppBar>
       { !showLogin && <SwipeableViews
@@ -91,6 +94,9 @@ export function MainView() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <WardenView/>
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          <UserView/>
         </TabPanel>
       </SwipeableViews>}
 
